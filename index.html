@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Building Growth Visualization</title>
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- Custom Styles -->
+    <style>
+      /* Enable 3D perspective */
+      #loader {
+        perspective: 800px;
+      }
+
+      #stats {
+        font-size: 14px;
+        display: flex;
+      }
+
+      .boxes {
+        --size: 32px;
+        --duration: 800ms;
+        height: calc(var(--size) * 2);
+        width: calc(var(--size) * 3);
+        position: relative;
+        transform-style: preserve-3d;
+        transform-origin: 50% 50%;
+        transform: rotateX(60deg) rotateZ(45deg);
+      }
+
+      .boxes .box {
+        width: var(--size);
+        height: var(--size);
+        top: 0;
+        left: 0;
+        position: absolute;
+        transform-style: preserve-3d;
+      }
+
+      .boxes .box:nth-child(1) {
+        transform: translate(100%, 0);
+        animation: box1 var(--duration) linear infinite;
+      }
+
+      .boxes .box:nth-child(2) {
+        transform: translate(0, 100%);
+        animation: box2 var(--duration) linear infinite;
+      }
+
+      .boxes .box:nth-child(3) {
+        transform: translate(100%, 100%);
+        animation: box3 var(--duration) linear infinite;
+      }
+
+      .boxes .box:nth-child(4) {
+        transform: translate(200%, 0);
+        animation: box4 var(--duration) linear infinite;
+      }
+
+      .boxes .box > div {
+        --background: #5c8df6;
+        --top: auto;
+        --right: auto;
+        --bottom: auto;
+        --left: auto;
+        --translateZ: calc(var(--size) / 2);
+        --rotateY: 0deg;
+        --rotateX: 0deg;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: var(--background);
+        top: var(--top);
+        right: var(--right);
+        bottom: var(--bottom);
+        left: var(--left);
+        transform: rotateY(var(--rotateY)) rotateX(var(--rotateX))
+          translateZ(var(--translateZ));
+      }
+
+      .boxes .box > div:nth-child(1) {
+        --top: 0;
+        --left: 0;
+      }
+
+      .boxes .box > div:nth-child(2) {
+        --background: #145af2;
+        --right: 0;
+        --rotateY: 90deg;
+      }
+
+      .boxes .box > div:nth-child(3) {
+        --background: #447cf5;
+        --rotateX: -90deg;
+      }
+
+      .boxes .box > div:nth-child(4) {
+        --background: #dbe3f4;
+        --top: 0;
+        --left: 0;
+        --translateZ: calc(var(--size) * 3 * -1);
+      }
+
+      @keyframes box1 {
+        0%,
+        50% {
+          transform: translate(100%, 0);
+        }
+        100% {
+          transform: translate(200%, 0);
+        }
+      }
+
+      @keyframes box2 {
+        0% {
+          transform: translate(0, 100%);
+        }
+        50% {
+          transform: translate(0, 0);
+        }
+        100% {
+          transform: translate(100%, 0);
+        }
+      }
+
+      @keyframes box3 {
+        0%,
+        50% {
+          transform: translate(100%, 100%);
+        }
+        100% {
+          transform: translate(0, 100%);
+        }
+      }
+
+      @keyframes box4 {
+        0% {
+          transform: translate(200%, 0);
+        }
+        50% {
+          transform: translate(200%, 100%);
+        }
+        100% {
+          transform: translate(100%, 100%);
+        }
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-100 h-screen flex flex-col">
+    <!-- Header -->
+    <header class="p-4 bg-blue-600 text-white text-xl font-bold">
+      Building Growth Visualization (2019-2025)
+    </header>
+
+    <!-- Controls -->
+    <div class="p-4 bg-white shadow flex flex-wrap items-center gap-6">
+      <!-- Year Slider -->
+      <div>
+        <label class="font-medium">Year:</label>
+        <input
+          id="yearRange"
+          type="range"
+          min="2019"
+          max="2025"
+          value="2019"
+          step="1"
+          class="w-64"
+        />
+        <span id="yearRangeLabel" class="ml-2 font-bold">2019</span>
+      </div>
+
+      <!-- Compare -->
+      <div>
+        <label class="font-medium">Compare:</label>
+        <select id="compareYear1" class="border rounded px-2 py-1">
+          <option value="">Year 1</option>
+        </select>
+        <select id="compareYear2" class="border rounded px-2 py-1">
+          <option value="">Year 2</option>
+        </select>
+        <button
+          id="compareBtn"
+          class="bg-blue-600 text-white px-3 py-1 rounded"
+        >
+          Compare
+        </button>
+        <a
+          href="buildings-from-image.html"
+          class="bg-red-600 text-white px-3 py-1 rounded"
+          >Extract from Image</a
+        >
+      </div>
+    </div>
+
+    <!-- Map -->
+    <div id="map" class="flex-1 relative">
+      <!-- Loader Overlay -->
+      <div
+        id="loader"
+        class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 z-50 hidden"
+      >
+        <div class="boxes">
+          <div class="box">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="box">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="box">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="box">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="p-4 bg-white shadow flex items-center gap-4">
+      <p class="font-bold flex">Stats:</p>
+      <div id="stats" class="mt-2 text-gray-700"></div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+      // Initialize map centered on OAU Ile-Ife by default
+      const OAU_COORDS = [7.5225, 4.5194];
+      const map = L.map("map").setView(OAU_COORDS, 15);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(
+        map
+      );
+
+      let currentLayers = [];
+
+      // Show loader
+      function showLoader() {
+        document.getElementById("loader").classList.remove("hidden");
+      }
+
+      // Hide loader
+      function hideLoader() {
+        document.getElementById("loader").classList.add("hidden");
+      }
+
+      // Remove current map layers
+      function clearLayers() {
+        currentLayers.forEach((layer) => map.removeLayer(layer));
+        currentLayers = [];
+      }
+
+      // Update stats display
+      function updateStats(data, extra = "") {
+        const count = data.features.length;
+        document.getElementById(
+          "stats"
+        ).innerHTML = `<p class="mr-5 items-center"><b>${count} Buildings</b></p><b>${extra}</b>`;
+      }
+
+      // Fetch and display buildings for a single year
+      const API_BASE = "http://127.0.0.1:8000/extract";
+
+      async function fetchYear(year) {
+        clearLayers();
+        showLoader();
+        try {
+          const res = await fetch(
+            `${API_BASE}/buildings-in-a-year/?year=${year}`
+          );
+          const geojson = await res.json();
+
+          const layer = L.geoJSON(geojson, {
+            style: { color: "blue", weight: 1, fillOpacity: 0.4 },
+          }).addTo(map);
+
+          currentLayers.push(layer);
+          updateStats(geojson, `<p>Year: ${year}</p>`);
+
+          // Fit map to data or fallback to OAU
+          if (geojson.features.length) {
+            map.fitBounds(layer.getBounds());
+          } else {
+            map.setView(OAU_COORDS, 16);
+          }
+        } catch (err) {
+          console.error("Failed to fetch year data:", err);
+        } finally {
+          hideLoader();
+        }
+      }
+
+      // Fetch and compare buildings between two years
+      async function fetchCompare(y1, y2) {
+        clearLayers();
+        showLoader();
+        try {
+          const res = await fetch(
+            `${API_BASE}/new-buildings/?year1=${y1}&year2=${y2}`
+          );
+          const data = await res.json();
+          console.log(data);
+
+          const year1 = JSON.parse(data.year1);
+          const year2 = JSON.parse(data.year2);
+
+          const layer1 = L.geoJSON(year1, {
+            style: { color: "blue", fillOpacity: 0.3 },
+          }).addTo(map);
+
+          const layer2 = L.geoJSON(year2, {
+            style: { color: "red", fillOpacity: 0.3 },
+          }).addTo(map);
+
+          currentLayers.push(layer1, layer2);
+
+          const c1 = year1.features.length;
+          const c2 = year2.features.length;
+          const diff = c2 - c1;
+
+          document.getElementById("stats").innerHTML = `
+        <p>Year ${y1}: ${c1} buildings</p>
+        <p>Year ${y2}: ${c2} buildings</p>
+        <p class="font-bold">Difference: ${
+          diff > 0 ? "+" + diff : diff
+        } buildings</p>
+      `;
+
+          // Fit map to both layers
+          const group = L.featureGroup([layer1, layer2]);
+          map.fitBounds(group.getBounds());
+        } catch (err) {
+          console.error("Failed to fetch compare data:", err);
+        } finally {
+          hideLoader();
+        }
+      }
+
+      // Populate compare dropdowns with years
+      function populateCompareDropdowns() {
+        const years = Array.from(
+          { length: 2025 - 2019 + 1 },
+          (_, i) => 2019 + i
+        );
+        const y1 = document.getElementById("compareYear1");
+        const y2 = document.getElementById("compareYear2");
+
+        years.forEach((year) => {
+          y1.appendChild(new Option(year, year));
+          y2.appendChild(new Option(year, year));
+        });
+
+        y1.addEventListener("change", syncCompareDropdowns);
+        y2.addEventListener("change", syncCompareDropdowns);
+      }
+
+      // Prevent same year being selected for both compare dropdowns
+      function syncCompareDropdowns() {
+        const y1 = document.getElementById("compareYear1").value;
+        const y2 = document.getElementById("compareYear2").value;
+
+        document.querySelectorAll("#compareYear1 option").forEach((opt) => {
+          opt.disabled = opt.value === y2 && opt.value !== "";
+        });
+        document.querySelectorAll("#compareYear2 option").forEach((opt) => {
+          opt.disabled = opt.value === y1 && opt.value !== "";
+        });
+      }
+
+      // Event listeners
+      document.getElementById("yearRange").addEventListener("input", (e) => {
+        const year = e.target.value;
+        document.getElementById("yearRangeLabel").textContent = year;
+        fetchYear(year);
+      });
+
+      document.getElementById("compareBtn").addEventListener("click", () => {
+        const y1 = document.getElementById("compareYear1").value;
+        const y2 = document.getElementById("compareYear2").value;
+        if (y1 && y2 && y1 !== y2) {
+          fetchCompare(y1, y2);
+        }
+      });
+
+      // Initialize app
+      populateCompareDropdowns();
+      fetchYear(2019); // Default load
+    </script>
+  </body>
+</html>
