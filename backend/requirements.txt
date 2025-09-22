@@ -1,33 +1,54 @@
+adlfs==2025.8.0
 affine @ file:///C:/b/abs_a90_dxt1pi/croot/affine_1756122943225/work
+aiohappyeyeballs==2.6.1
+aiohttp==3.12.15
+aiosignal==1.4.0
+annotated-types @ file:///home/conda/feedstock_root/build_artifacts/annotated-types_1733247046149/work
 asgiref==3.9.1
+async-timeout==5.0.1
 attrs @ file:///C:/b/abs_89hmquz5ga/croot/attrs_1734533130810/work
+azure-core==1.35.1
+azure-datalake-store==0.0.53
+azure-identity==1.25.0
+azure-storage-blob==12.26.0
 Bottleneck @ file:///C:/b/abs_816hr2khp1/croot/bottleneck_1731058648110/work
 branca @ file:///C:/b/abs_5fic0q0ykh/croot/branca_1675157632359/work
 Brotli @ file:///C:/b/abs_c415aux9ra/croot/brotli-split_1736182803933/work
 brotlicffi @ file:///C:/b/abs_f4lixvzmxt/croot/brotlicffi_1736183286104/work
 certifi @ file:///C:/b/abs_2bz30lzohz/croot/certifi_1754570654565/work/certifi
-cffi @ file:///C:/b/abs_29_b57if3f/croot/cffi_1736184144340/work
+cffi==2.0.0
 charset-normalizer @ file:///croot/charset-normalizer_1721748349566/work
 click @ file:///C:/b/abs_42rbjngfys/croot/click_1744271606983/work
 click-plugins @ file:///Users/ktietz/demo/mc3/conda-bld/click-plugins_1630665883852/work
 cligj==0.7.2
 colorama @ file:///C:/b/abs_a9ozq0l032/croot/colorama_1672387194846/work
 contourpy @ file:///C:/b/abs_f2u2o_8s9g/croot/contourpy_1732540071787/work
+cryptography==46.0.1
 cycler @ file:///tmp/build/80754af9/cycler_1637851556182/work
 Django==5.2.6
+django-cors-headers==4.9.0
 filelock @ file:///C:/b/abs_758187j281/croot/filelock_1744281404850/work
 fiona==1.10.1
 folium @ file:///home/conda/feedstock_root/build_artifacts/folium_1750113804946/work
 fonttools @ file:///C:/b/abs_4crkswws2h/croot/fonttools_1737040078745/work
+frozenlist==1.7.0
 fsspec==2025.9.0
 GDAL @ file:///C:/b/abs_16mu6c_alz/croot/gdal-split_1744626846502/work/build/swig/python
+geographiclib==2.1
+geojson==3.2.0
 geopandas @ file:///C:/b/abs_d6j7hncsaz/croot/geopandas-split_1755761514156/work
+geopy==2.4.1
 gmpy2 @ file:///C:/b/abs_d8ki0o0h97/croot/gmpy2_1738085498525/work
 huggingface-hub==0.34.4
 idna @ file:///C:/b/abs_aad84bnnw5/croot/idna_1714398896795/work
+imageio==2.37.0
+isodate==0.7.2
 Jinja2 @ file:///C:/b/abs_920kup4e6u/croot/jinja2_1741711580669/work
 joblib @ file:///C:/b/abs_0ahqdkwgvn/croot/joblib_1754310214981/work
+jsonschema==4.25.1
+jsonschema-specifications==2025.9.1
 kiwisolver @ file:///C:/b/abs_faf90xet7a/croot/kiwisolver_1737040915779/work
+lazy_loader==0.4
 mapclassify @ file:///home/conda/feedstock_root/build_artifacts/mapclassify_1733731066416/work
 MarkupSafe @ file:///C:/b/abs_a0ma7ge0jc/croot/markupsafe_1738584052792/work
 matplotlib==3.10.5
@@ -35,27 +56,46 @@ mkl-service==2.4.0
 mkl_fft @ file:///C:/Users/dev-admin/mkl/mkl_fft_1730823082242/work
 mkl_random @ file:///C:/Users/dev-admin/mkl/mkl_random_1730822522280/work
 mpmath @ file:///C:/b/abs_7833jrbiox/croot/mpmath_1690848321154/work
+msal==1.33.0
+msal-extensions==1.3.1
+multidict==6.6.4
 networkx @ file:///C:/b/abs_b054htfn9t/croot/networkx_1737043671910/work
 numexpr @ file:///C:/b/abs_4e0h6i5ip2/croot/numexpr_1752521729801/work
 numpy @ file:///D:/bld/numpy_1747544591878/work/dist/numpy-2.2.6-cp310-cp310-win_amd64.whl#sha256=af66576ce916c795ffa81be9620c8138a3fda6e1713b2bf7775a630e47eca3a8
 opencv-python==4.10.0
 opencv-python-headless==4.10.0
+osmium==4.1.1
+osmnx==2.0.6
 packaging @ file:///C:/b/abs_f7t3vr2_lo/croot/packaging_1753775377650/work
 pandas @ file:///C:/b/abs_58a1hlvjeo/croot/pandas_1756466410850/work/dist/pandas-2.3.2-cp310-cp310-win_amd64.whl#sha256=c5e64b82058916af3f8dd153264d32f927a5790ee19113e282b31ea45d923c7e
 pillow @ file:///C:/b/abs_b06nvnir5m/croot/pillow_1752524543576/work
+planetary-computer @ file:///home/conda/feedstock_root/build_artifacts/planetary-computer_1734711864352/work
+propcache==0.3.2
+pyarrow==21.0.0
 pycparser @ file:///C:/miniconda3/conda-bld/pycparser_1757496059965/work
+pydantic @ file:///home/conda/feedstock_root/build_artifacts/pydantic_1757881615017/work
+pydantic_core @ file:///D:/bld/bld/rattler-build_pydantic-core_1746625416/work
+PyJWT==2.10.1
 pyogrio @ file:///C:/b/abs_0cqzcfsv7r/croot/pyogrio_1741107177502/work
 pyparsing @ file:///C:/b/abs_40z8gyj9wi/croot/pyparsing_1731445739241/work
 pyproj @ file:///C:/b/abs_fdab5w83yy/croot/pyproj_1739284782126/work
 PyQt6==6.7.1
 PyQt6_sip @ file:///C:/b/abs_25j3xlesmj/croot/pyqt-split_1753427295085/work/pyqt_sip
 PySocks @ file:///C:/ci_310/pysocks_1642089375450/work
+pystac @ file:///home/conda/feedstock_root/build_artifacts/pystac_1758218055393/work
+pystac-client @ file:///home/conda/feedstock_root/build_artifacts/pystac-client_1752925287736/work
 python-dateutil @ file:///C:/b/abs_3au_koqnbs/croot/python-dateutil_1716495777160/work
+python-dotenv @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_python-dotenv_1750789290/work
 pytz @ file:///C:/b/abs_f8wdzeix0n/croot/pytz_1752135878094/work
 PyYAML @ file:///C:/b/abs_14xkfs39bx/croot/pyyaml_1728657968772/work
 rasterio==1.4.3
+referencing==0.36.2
 requests @ file:///C:/b/abs_f53smfvswb/croot/requests_1756709376206/work
+retrying==1.4.2
+rioxarray==0.19.0
+rpds-py==0.27.1
 safetensors==0.6.2
+scikit-image==0.25.2
 scikit-learn @ file:///C:/b/abs_45qemhn4lg/croot/scikit-learn_1753427401078/work
 scipy @ file:///C:/b/abs_71q96u23a4/croot/scipy_1747238057723/work/dist/scipy-1.15.3-cp310-cp310-win_amd64.whl#sha256=06013d45c5cad262bccdca1fbe5c25a720be04ae66dc83d75d1f749d118a7346
 segmentation_models_pytorch==0.5.0
@@ -65,6 +105,7 @@ six @ file:///C:/b/abs_149wuyuo1o/croot/six_1744271521515/work
 sqlparse==0.5.3
 sympy==1.13.1
 threadpoolctl @ file:///C:/b/abs_def0dwqlft/croot/threadpoolctl_1719407816649/work
+tifffile==2025.5.10
 timm==1.0.19
 tomli @ file:///C:/b/abs_88e598m6o8/croot/tomli_1753774604115/work
 torch==2.5.1
@@ -72,9 +113,12 @@ torchaudio==2.5.1
 torchvision==0.20.1
 tornado @ file:///C:/b/abs_7dzpc171lf/croot/tornado_1748956950306/work
 tqdm==4.67.1
+typing-inspection @ file:///home/conda/feedstock_root/build_artifacts/typing-inspection_1747870647094/work
 typing_extensions @ file:///C:/b/abs_ecq8gc0vbm/croot/typing_extensions_1756281142218/work
 tzdata @ file:///croot/python-tzdata_1746123641790/work
 unicodedata2 @ file:///C:/b/abs_dfnftvxi4k/croot/unicodedata2_1736543771112/work
 urllib3 @ file:///C:/b/abs_393g1ayee_/croot/urllib3_1750775481226/work
 win-inet-pton @ file:///C:/ci_310/win_inet_pton_1642658466512/work
+xarray==2025.6.1
 xyzservices @ file:///C:/b/abs_8bh3h2qh76/croot/xyzservices_1675159066824/work
+yarl==1.20.1
