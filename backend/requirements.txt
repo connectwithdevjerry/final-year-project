@@ -15,7 +15,7 @@ Bottleneck @ file:///C:/b/abs_816hr2khp1/croot/bottleneck_1731058648110/work
 branca @ file:///C:/b/abs_5fic0q0ykh/croot/branca_1675157632359/work
 Brotli @ file:///C:/b/abs_c415aux9ra/croot/brotli-split_1736182803933/work
 brotlicffi @ file:///C:/b/abs_f4lixvzmxt/croot/brotlicffi_1736183286104/work
-certifi @ file:///C:/b/abs_2bz30lzohz/croot/certifi_1754570654565/work/certifi
+certifi==2025.8.3
 cffi==2.0.0
 charset-normalizer @ file:///croot/charset-normalizer_1721748349566/work
 click @ file:///C:/b/abs_42rbjngfys/croot/click_1744271606983/work
